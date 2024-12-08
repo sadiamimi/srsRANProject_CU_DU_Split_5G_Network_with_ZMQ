@@ -82,6 +82,6 @@ sudo systemctl status mongod
 3. CU
 4. DU
 5. UE
-6. Start IP traffic (e.g., ping)
+6. Start Uplink and Downlink IP traffic (e.g., ping)
 7. xApp
 8. Grafana
