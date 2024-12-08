@@ -75,7 +75,7 @@ sudo systemctl status mongod
 
 &nbsp;
 
- ## 02. Running the Network
+ ## 03. Running the Network
  The following order should be used when running the network:
 1. Open5GS
 2. NearRT-RIC
