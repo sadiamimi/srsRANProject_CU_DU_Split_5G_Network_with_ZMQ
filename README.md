@@ -29,7 +29,7 @@ https://github.com/srsran/srsran_project
 
 **VM-3:** 5GC, CU, Downlink Traffic
 
-<ins>**Installing Docker:**</ins>
+<ins>**Installing Docker for VM 2 & 3:**</ins>
 
 ```
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
@@ -51,7 +51,37 @@ sudo apt-get update
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-sudo docker run hello-world
 ```
 
 &nbsp;
+
+<ins>**Installing mongodb (for 5GC) for VM 3 :**</ins>
+```
+#Download and add MongoDB GPG key:
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo tee /etc/apt/trusted.gpg.d/mongodb-org-6.0.gpg
+#Add MongoDB repository to the list of sources:
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+#Update package list:
+sudo apt update
+#Install MongoDB:
+sudo apt install -y mongodb-org
+#Start the MongoDB service:
+sudo systemctl start mongod
+#Enable MongoDB to start on boot:
+sudo systemctl enable mongod
+#Check the status of MongoDB service:
+sudo systemctl status mongod
+```
+
+&nbsp;
+
+ ## 02. Running the Network
+ The following order should be used when running the network:
+1. Open5GS
+2. NearRT-RIC
+3. CU
+4. DU
+5. UE
+6. Start IP traffic (e.g., ping)
+7. xApp
+8. Grafana
