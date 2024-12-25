@@ -57,20 +57,21 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 <ins>**Installing mongodb (for 5GC) for VM 3 :**</ins>
 ```
-#Download and add MongoDB GPG key:
-wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo tee /etc/apt/trusted.gpg.d/mongodb-org-6.0.gpg
-#Add MongoDB repository to the list of sources:
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-#Update package list:
+# Download and add the MongoDB GPG key in the correct format:
+curl -fsSL https://pgp.mongodb.com/server-6.0.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mongodb-org-6.0.gpg
+# Add MongoDB repository to the list of sources:
+echo "deb [ arch=amd64,arm64 signed-by=/etc/apt/trusted.gpg.d/mongodb-org-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+# Update package list:
 sudo apt update
-#Install MongoDB:
+# Install MongoDB:
 sudo apt install -y mongodb-org
-#Start the MongoDB service:
+# Start the MongoDB service:
 sudo systemctl start mongod
-#Enable MongoDB to start on boot:
+# Enable MongoDB to start on boot:
 sudo systemctl enable mongod
-#Check the status of MongoDB service:
+# Check the status of the MongoDB service:
 sudo systemctl status mongod
+
 ```
 
 &nbsp;
