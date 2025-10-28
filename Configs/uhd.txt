@@ -1,0 +1,49 @@
+Configuring Network Interfaces for Radio Instances
+Radio instances may have an additional network interface connected to the USRP device.
+
+Identify Network Interfaces:
+
+ip a
+Find the USRP interface (e.g., ens5, ens7).
+
+If the interface is down, it needs configuration.
+
+Edit Netplan Configuration:
+
+Open the netplan configuration file:
+
+sudo nano /etc/netplan/01-netcfg.yaml
+Update the interface name and configuration:
+
+network:
+  version: 2
+  ethernets:
+    ens5:
+      dhcp4: false
+      addresses:
+        - 192.168.<USRP_SUBNET>.<INSTANCE_IP>/24
+      mtu: 9000
+Replace ens5 with your interface name.
+
+Replace <USRP_SUBNET> with your USRP subnet number.
+
+Replace <INSTANCE_IP> with an IP between 4 and 10.
+
+Important
+
+Use spaces, not tabs, in YAML files.
+
+Apply Network Configuration:
+
+sudo netplan apply
+Verify Connectivity:
+
+Check interface status:
+
+ip a
+Ping the USRP device:
+
+ping 192.168.<USRP_SUBNET>.2
+Find the USRP device:
+
+uhd_find_devices --args="addr=192.168.<USRP_SUBNET>.2"
